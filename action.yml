@@ -1,0 +1,19 @@
+# GitHub Action composite definition (task 9.1)
+name: Nav2 Doc Enforcer
+description: Checks that Nav2 C++ parameters are documented in Markdown files
+
+inputs:
+  plugin_pairs:
+    description: JSON array of [cpp_file, md_file] pairs to check
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+      shell: bash
+
+    - name: Run Doc Enforcer
+      run: python src/enforcer.py
+      shell: bash
